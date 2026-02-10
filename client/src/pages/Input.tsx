@@ -69,12 +69,12 @@ export default function InputPage() {
     <div className="max-w-4xl mx-auto space-y-8">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-3xl font-display font-bold text-white">Match Scouting</h2>
-          <p className="text-muted-foreground">Enter performance data for a specific match.</p>
+          <h2 className="text-3xl font-display font-bold text-white">比賽觀測 (Scouting)</h2>
+          <p className="text-muted-foreground">輸入特定比賽的表現數據。</p>
         </div>
         <div className="flex gap-2">
            <span className="text-xs text-muted-foreground self-end font-mono">
-             {settings.googleSheetUrl ? "CONNECTED TO SHEETS" : "LOCAL STORAGE MODE"}
+             {settings.googleSheetUrl ? "已連接至試算表" : "本地儲存模式"}
            </span>
         </div>
       </div>
@@ -82,11 +82,11 @@ export default function InputPage() {
       <form onSubmit={handleSubmit} className="space-y-6">
         <Card className="bg-secondary/30 border-white/10 cyber-border">
           <CardHeader>
-            <CardTitle className="text-primary font-display tracking-widest text-lg">MATCH INFO</CardTitle>
+            <CardTitle className="text-primary font-display tracking-widest text-lg">比賽資訊</CardTitle>
           </CardHeader>
           <CardContent className="grid grid-cols-2 gap-6">
             <div className="space-y-2">
-              <Label className="text-xs uppercase tracking-widest text-muted-foreground">Match Number</Label>
+              <Label className="text-xs uppercase tracking-widest text-muted-foreground">比賽場次 (Match Number)</Label>
               <Input 
                 type="number" 
                 placeholder="001" 
@@ -96,7 +96,7 @@ export default function InputPage() {
               />
             </div>
             <div className="space-y-2">
-              <Label className="text-xs uppercase tracking-widest text-muted-foreground">Team Number</Label>
+              <Label className="text-xs uppercase tracking-widest text-muted-foreground">隊伍編號 (Team Number)</Label>
               <Input 
                 type="number" 
                 placeholder="254" 
@@ -139,7 +139,7 @@ export default function InputPage() {
                       onValueChange={(val) => handleInputChange(item.id, val)}
                     >
                       <SelectTrigger className="bg-black/50 border-white/10 font-mono">
-                        <SelectValue placeholder="Select Grade" />
+                        <SelectValue placeholder="選擇評級" />
                       </SelectTrigger>
                       <SelectContent>
                         {["S", "A", "B", "C", "D", "E", "F"].map((grade) => (
@@ -151,7 +151,7 @@ export default function InputPage() {
 
                   {item.type === "custom" && (
                     <Textarea 
-                      placeholder="Enter notes..."
+                      placeholder="輸入備註..."
                       value={formData[item.id] || ""}
                       onChange={(e) => handleInputChange(item.id, e.target.value)}
                       className="bg-black/50 border-white/10 min-h-[80px]"
@@ -175,7 +175,7 @@ export default function InputPage() {
             ) : (
               <Save className="mr-2 h-4 w-4" />
             )}
-            SUBMIT DATA
+            儲存數據
           </Button>
         </div>
       </form>

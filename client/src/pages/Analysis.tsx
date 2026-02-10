@@ -45,15 +45,15 @@ export default function AnalysisPage() {
   return (
     <div className="max-w-6xl mx-auto space-y-8">
       <div>
-        <h2 className="text-3xl font-display font-bold text-white">Team Analysis</h2>
-        <p className="text-muted-foreground">Deep dive into specific team performance.</p>
+        <h2 className="text-3xl font-display font-bold text-white">隊伍分析</h2>
+        <p className="text-muted-foreground">深入了解特定隊伍的表現。</p>
       </div>
 
       {/* Search Bar */}
       <div className="flex justify-center py-8">
         <form onSubmit={handleSearch} className="flex gap-2 w-full max-w-lg">
           <Input 
-             placeholder="Enter Team Number (e.g. 254)" 
+             placeholder="輸入隊伍編號 (例如 254)" 
              value={searchTeam}
              onChange={(e) => setSearchTeam(e.target.value)}
              className="bg-black/50 border-white/20 h-12 text-lg font-mono text-center focus:border-primary"
@@ -68,11 +68,11 @@ export default function AnalysisPage() {
         <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
           <div className="flex items-center gap-4">
              <div className="text-5xl font-display font-bold text-white tracking-tighter">
-               <span className="text-primary text-2xl mr-2">TEAM</span>
+               <span className="text-primary text-2xl mr-2">隊伍</span>
                {activeTeam}
              </div>
              <div className="bg-white/10 px-3 py-1 rounded text-xs uppercase tracking-widest text-gray-400">
-               {matches.length} Matches Logged
+               已紀錄 {matches.length} 場比賽
              </div>
           </div>
 
@@ -86,7 +86,7 @@ export default function AnalysisPage() {
                 <CardContent>
                   <div className="text-3xl font-mono font-bold text-white">{value}</div>
                   <div className="text-xs text-primary mt-1 flex items-center gap-1">
-                    <TrendingUp className="w-3 h-3" /> AVG
+                    <TrendingUp className="w-3 h-3" /> 平均值
                   </div>
                 </CardContent>
               </Card>
@@ -96,7 +96,7 @@ export default function AnalysisPage() {
           {/* Trend Chart */}
           <Card className="bg-secondary/30 border-white/10 cyber-border">
             <CardHeader>
-              <CardTitle className="text-primary font-display tracking-widest text-lg">PERFORMANCE TREND</CardTitle>
+              <CardTitle className="text-primary font-display tracking-widest text-lg">表現趨勢</CardTitle>
             </CardHeader>
             <CardContent className="h-[350px]">
               <ResponsiveContainer width="100%" height="100%">
@@ -127,7 +127,7 @@ export default function AnalysisPage() {
           <Card className="bg-secondary/30 border-white/10">
             <CardHeader>
                <CardTitle className="text-primary font-display tracking-widest text-lg flex items-center gap-2">
-                 <History className="w-5 h-5" /> MATCH HISTORY
+                 <History className="w-5 h-5" /> 比賽歷史
                </CardTitle>
             </CardHeader>
             <CardContent>
@@ -136,7 +136,7 @@ export default function AnalysisPage() {
                   <AccordionItem key={match.id} value={match.id} className="border-white/10">
                     <AccordionTrigger className="hover:no-underline hover:bg-white/5 px-2 rounded group">
                       <div className="flex items-center gap-4 w-full">
-                        <span className="font-mono text-primary font-bold">MATCH {match.matchNumber}</span>
+                        <span className="font-mono text-primary font-bold">場次 {match.matchNumber}</span>
                         <span className="text-xs text-muted-foreground ml-auto mr-4">
                           {new Date(match.timestamp).toLocaleDateString()}
                         </span>

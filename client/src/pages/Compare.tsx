@@ -84,15 +84,15 @@ export default function ComparePage() {
   return (
     <div className="max-w-6xl mx-auto space-y-8">
       <div>
-        <h2 className="text-3xl font-display font-bold text-white">Team Comparison</h2>
-        <p className="text-muted-foreground">Compare metrics across up to 8 teams.</p>
+        <h2 className="text-3xl font-display font-bold text-white">隊伍比較</h2>
+        <p className="text-muted-foreground">比較最多 8 支隊伍的數據指標。</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
         {/* Team Selector Sidebar */}
         <Card className="bg-secondary/30 border-white/10 md:col-span-1 h-fit">
           <CardHeader>
-            <CardTitle className="text-sm font-display tracking-widest text-primary">SELECT TEAMS ({selectedTeams.length}/8)</CardTitle>
+            <CardTitle className="text-sm font-display tracking-widest text-primary">選擇隊伍 ({selectedTeams.length}/8)</CardTitle>
           </CardHeader>
           <CardContent>
              <div className="flex flex-wrap gap-2 mb-4">
@@ -107,14 +107,14 @@ export default function ComparePage() {
                ))}
              </div>
              <div className="space-y-1 h-[400px] overflow-y-auto pr-2 custom-scrollbar">
-               {allTeams.length === 0 && <p className="text-xs text-muted-foreground">No teams found.</p>}
+               {allTeams.length === 0 && <p className="text-xs text-muted-foreground">尚未發現隊伍。</p>}
                {allTeams.map(team => (
                  <div 
                    key={team}
                    onClick={() => toggleTeam(team)}
                    className={`p-2 rounded text-sm cursor-pointer transition-colors flex justify-between items-center ${selectedTeams.includes(team) ? 'bg-primary/20 text-white' : 'hover:bg-white/5 text-gray-400'}`}
                  >
-                   <span>Team {team}</span>
+                   <span>隊伍 {team}</span>
                    {selectedTeams.includes(team) && <div className="w-2 h-2 rounded-full bg-primary" />}
                  </div>
                ))}
@@ -127,14 +127,14 @@ export default function ComparePage() {
            {selectedTeams.length === 0 ? (
              <div className="h-96 border border-dashed border-white/10 rounded-xl flex flex-col items-center justify-center text-muted-foreground">
                <Users className="w-12 h-12 mb-4 opacity-20" />
-               <p>Select teams to view comparison data</p>
+               <p>選擇隊伍以查看比較數據</p>
              </div>
            ) : (
              <>
                {/* Radar Comparison */}
                <Card className="bg-secondary/30 border-white/10 cyber-border">
                  <CardHeader>
-                    <CardTitle className="text-primary font-display tracking-widest text-lg">PERFORMANCE PROFILE</CardTitle>
+                    <CardTitle className="text-primary font-display tracking-widest text-lg">能力分佈圖</CardTitle>
                  </CardHeader>
                  <CardContent className="h-[400px]">
                    <ResponsiveContainer width="100%" height="100%">
@@ -145,7 +145,7 @@ export default function ComparePage() {
                        {selectedTeams.map((team, idx) => (
                          <Radar
                            key={team}
-                           name={`Team ${team}`}
+                           name={`隊伍 ${team}`}
                            dataKey={`team${idx}`}
                            stroke={COLORS[idx]}
                            fill={COLORS[idx]}
@@ -165,7 +165,7 @@ export default function ComparePage() {
                {/* Bar Comparison */}
                <Card className="bg-secondary/30 border-white/10">
                  <CardHeader>
-                    <CardTitle className="text-primary font-display tracking-widest text-lg">AVERAGE SCORES</CardTitle>
+                    <CardTitle className="text-primary font-display tracking-widest text-lg">平均得分</CardTitle>
                  </CardHeader>
                  <CardContent className="h-[400px]">
                    <ResponsiveContainer width="100%" height="100%">

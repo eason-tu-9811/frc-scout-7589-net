@@ -44,27 +44,27 @@ export function AppSidebar() {
           <Gamepad2 className="w-8 h-8 text-primary" />
           SCOUT<span className="text-primary">OS</span>
         </h1>
-        <p className="text-xs text-muted-foreground mt-1 tracking-widest uppercase">FRC Data Systems</p>
+        <p className="text-xs text-muted-foreground mt-1 tracking-widest uppercase">FRC 數據系統</p>
       </div>
 
       <nav className="flex-1 py-6 space-y-1">
-        <NavItem href="/" icon={ClipboardList} label="Data Input" />
-        <NavItem href="/analysis" icon={BarChart3} label="Team Analysis" />
-        <NavItem href="/compare" icon={Scale} label="Comparison" />
-        <NavItem href="/settings" icon={Settings} label="System Config" />
+        <NavItem href="/" icon={ClipboardList} label="數據輸入" />
+        <NavItem href="/analysis" icon={BarChart3} label="隊伍分析" />
+        <NavItem href="/compare" icon={Scale} label="隊伍比較" />
+        <NavItem href="/settings" icon={Settings} label="系統設定" />
       </nav>
 
       <div className="p-4 border-t border-border">
-        <h3 className="text-xs font-display text-muted-foreground mb-3 px-2">RECENT MATCHES</h3>
+        <h3 className="text-xs font-display text-muted-foreground mb-3 px-2">最近比賽</h3>
         <div className="space-y-1">
           {recentMatches.length === 0 ? (
-            <p className="text-xs text-muted-foreground px-2 italic">No data logged yet</p>
+            <p className="text-xs text-muted-foreground px-2 italic">尚無紀錄</p>
           ) : (
             recentMatches.map((match) => (
               <div key={match.id} className="px-2 py-2 text-sm text-gray-400 hover:text-white border border-transparent hover:border-white/10 bg-white/0 hover:bg-white/5 transition-colors">
                 <span className="text-primary font-mono">M{match.matchNumber}</span>
                 <span className="mx-2">·</span>
-                <span className="">Team {match.teamNumber}</span>
+                <span className="">隊伍 {match.teamNumber}</span>
               </div>
             ))
           )}
