@@ -76,17 +76,35 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
     setItems(items.filter((i) => i.id !== id));
   };
 
-  const addMatch = (match: Omit<MatchData, "id" | "timestamp">) => {
+  const addMatch = async (match: Omit<MatchData, "id" | "timestamp">) => {
     const newMatch = {
       ...match,
       id: Math.random().toString(36).substr(2, 9),
       timestamp: Date.now(),
     };
-    setMatches([...matches, newMatch]);
+    
+    const updatedMatches = [...matches, newMatch];
+    setMatches(updatedMatches);
     
     // Update known teams list
     if (!settings.teamList.includes(match.teamNumber)) {
       setSettings(prev => ({ ...prev, teamList: [...prev.teamList, match.teamNumber].sort() }));
+    }
+
+    // Google Sheets Integration via URL
+    if (settings.googleSheetUrl) {
+      try {
+        await fetch(settings.googleSheetUrl, {
+          method: 'POST',
+          mode: 'no-cors', // standard for GAS web apps
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(newMatch),
+        });
+      } catch (error) {
+        console.error("Failed to sync with Google Sheets:", error);
+      }
     }
   };
 

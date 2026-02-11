@@ -7,12 +7,34 @@ import {
   BarChart3, 
   Scale, 
   Gamepad2,
-  ChevronRight 
+  ChevronRight,
+  Sun,
+  Moon
 } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { useEffect, useState } from "react";
 
 export function AppSidebar() {
   const [location] = useLocation();
   const { matches } = useData();
+  const [theme, setTheme] = useState<'light' | 'dark'>(() => {
+    if (typeof window !== 'undefined') {
+      return document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+    }
+    return 'light';
+  });
+
+  useEffect(() => {
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(prev => prev === 'light' ? 'dark' : 'light');
+  };
 
   // Get recent matches for the sidebar list
   const recentMatches = [...matches].sort((a, b) => b.timestamp - a.timestamp).slice(0, 5);
@@ -54,20 +76,31 @@ export function AppSidebar() {
         <NavItem href="/settings" icon={Settings} label="系統設定" />
       </nav>
 
-      <div className="p-4 border-t border-border">
-        <h3 className="text-xs font-display text-muted-foreground mb-3 px-2">最近比賽</h3>
-        <div className="space-y-1">
-          {recentMatches.length === 0 ? (
-            <p className="text-xs text-muted-foreground px-2 italic">尚無紀錄</p>
-          ) : (
-            recentMatches.map((match) => (
-              <div key={match.id} className="px-2 py-2 text-sm text-gray-400 hover:text-white border border-transparent hover:border-white/10 bg-white/0 hover:bg-white/5 transition-colors">
-                <span className="text-primary font-mono">M{match.matchNumber}</span>
-                <span className="mx-2">·</span>
-                <span className="">隊伍 {match.teamNumber}</span>
-              </div>
-            ))
-          )}
+      <div className="p-4 border-t border-border space-y-4">
+        <Button 
+          variant="ghost" 
+          size="sm" 
+          onClick={toggleTheme}
+          className="w-full justify-start text-muted-foreground hover:text-white"
+        >
+          {theme === 'light' ? <Moon className="w-4 h-4 mr-2" /> : <Sun className="w-4 h-4 mr-2" />}
+          {theme === 'light' ? '切換深色模式' : '切換亮色模式'}
+        </Button>
+        <div>
+          <h3 className="text-xs font-display text-muted-foreground mb-3 px-2">最近比賽</h3>
+          <div className="space-y-1">
+            {recentMatches.length === 0 ? (
+              <p className="text-xs text-muted-foreground px-2 italic">尚無紀錄</p>
+            ) : (
+              recentMatches.map((match) => (
+                <div key={match.id} className="px-2 py-2 text-sm text-gray-400 hover:text-white border border-transparent hover:border-white/10 bg-white/0 hover:bg-white/5 transition-colors">
+                  <span className="text-primary font-mono">M{match.matchNumber}</span>
+                  <span className="mx-2">·</span>
+                  <span className="">隊伍 {match.teamNumber}</span>
+                </div>
+              ))
+            )}
+          </div>
         </div>
       </div>
     </div>
