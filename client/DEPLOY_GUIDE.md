@@ -71,11 +71,27 @@
     *   「誰可以存取」選擇 **所有人** (Anyone)。
     *   部署後，複製產生的 **網頁應用程式 URL**。
 
-## 第三部分：網頁設定
+## 常見問題排除 (Troubleshooting)
 
-1.  開啟部署好的網頁。
-2.  點擊側邊欄的 **系統設定**。
-3.  在 **Google Apps Script URL** 欄位中，貼上剛才複製的 URL。
-4.  點擊 **儲存**。
+如果您部署後看到 **404 錯誤** 或 **無法載入資源**：
 
-現在，您每次在網頁中輸入數據並提交時，資料就會自動同步到您的 Google 試算表中了！
+1.  **檢查 index.html**：
+    *   確保 `index.html` 中的 script 標籤路徑是 `./src/main.tsx` (有點號在前面)。
+2.  **GitHub 儲存庫名稱**：
+    *   如果您的儲存庫名稱不是 `username.github.io`（即專案在子路徑下），請確保 `vite.config.ts` 中的 `base` 設為 `./`。
+3.  **檔案結構**：
+    *   上傳 GitHub 時，請確保 `index.html` 放在**根目錄**，而不是 `client/` 目錄內。
+    *   所有的 `src/` 目錄也應該放在根目錄下。
+
+## 正確的 GitHub 檔案結構：
+```
+/ (根目錄)
+├── index.html
+├── package.json
+├── vite.config.ts
+├── src/
+│   ├── main.tsx
+│   └── ...
+├── public/
+└── ...
+```
