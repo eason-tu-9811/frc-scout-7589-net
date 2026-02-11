@@ -12,7 +12,7 @@ export default defineConfig({
   // 1. 設定 Base Path (重要！如果你要部署到 GitHub Pages)
   // 如果你的儲存庫名字是 "my-app"，這裡就填 "/my-app/"
   // 如果你是用自訂網域(例如 www.example.com)，這裡就保持 "/"
-  base: "/你的儲存庫名稱/", 
+  base: "/frc-scout-7589-net/", 
 
   plugins: [
     react(),
